@@ -18,40 +18,30 @@ public class pre_finals_emilio {
     
     public static void main(String[] args)  throws IOException {
     	
-    Scanner scan = new Scanner(System.in);
-    
-		ArrayList<String> words = new ArrayList<String>();
+    Scanner sc = new Scanner(System.in);
+    ArrayList<String> words = new ArrayList<String>();      //An ArrayList that accepts Strings 
+    boolean Running = true;                                 // A Bool that has a default value of true
 		
-		String input = "";
-		
-		do
+	System.out.println("PLEASE ENTER WORDS");	   //Enter the Words 
+		while(Running == true)                          // sets the while of the bool to true
 		{
-			input = scan.nextLine();
-			words.add(input);
+			String letter = sc.next();               //Shows input while the bool is true
+		if (!letter.equals(":q")) {	                   // if the user inputs a :q  
+                   byte[] encode = Base64.getEncode().encode((letter + "\n").getBytes());   // Put the Encoded words into an array that can be used for multiple inputs      
 		}
-		while (!input.equals(":q"));
-		{
-		
-			for(String a : words)
-			{
-				String base64 = Base64.getEncoder() .encodeToString(a.getBytes());
-				System.out.println ("Save or Discard?");
-				String choose = scan.nextLine();
-				
-				if(choose.equals("save"))
-				{
-					FileWriter fw = new FileWriter( base64+".jgh");
-					System.out.println("Input File name:");
-					fw.write(scan.nextLine());
-					break;
-				}	
-				else
-				{
-					System.out.println("bahala na");
-				}
+                else {                                        // the bool sets to false state after input :q
+                   Running = false;                           
+                   System.out.println("Enter your FileName");            // Enter the Set Filename 
+                   String Filename = sc.next();                      // The Input to type the Filename
+                   writter files = new FileWritter(Filename + ".DAR"); // To save the Input file into a file with an extension
+
+                   for (String a: word                                  // a for loop for ArrayList 
+                   {
+                          files.write(a);                                   // Saves ArrayList into the File with an extension
+		   }
+		          files.close();                         //Closes the File 
+                          sc.close();                            //Closes the Scanner
 			}
-			
 		}
-				
-		}
+      } 
 }
